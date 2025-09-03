@@ -1,0 +1,18 @@
+#!/bin/bash
+
+allowed_keys=("my-laptop" "john-laptop" "bishal-laptop")
+
+is_allowed=false
+for key in "${allowed_keys[@]}"; do
+    if [[ "$KEY_ID" == "$key" ]]; then
+        is_allowed=true
+        break
+    fi
+done
+
+if [[ "$is_allowed" != true ]]; then
+    echo "❌ Push rejected: only approved laptops can push" >&2
+    exit 1
+fi
+
+exit 0
