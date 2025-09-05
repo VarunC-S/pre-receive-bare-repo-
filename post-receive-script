@@ -1,0 +1,38 @@
+#!/bin/bash
+
+LOGFILE=/home/user/git-activity.log
+
+while read oldrev newrev ref
+do
+    {
+        echo "----- PUSH DETAILS -----"
+        echo "User      : $KEY_ID"
+        echo "Ref       : $ref"
+        echo "Old Rev   : $oldrev"
+        echo "New Rev   : $newrev"
+
+        echo "Commits:"
+        git log --pretty=format:"%h | %an | %ae | %s | %ci" $oldrev..$newrev
+
+        echo "Files Changed:"
+        git diff --name-status $oldrev $newrev
+
+        echo ""
+    } >> $LOGFILE
+done
+
+==================================================================================
+to create this:-
+
+cd bare-repo.git
+cd hooks
+ls
+nano post-receive
+PASTE THE ABOVE SCRIPT
+cd ..
+chmod +x post-receive --->  this makes a file run as program/script
+
+-------------------------------------------------|
+WHEN YOU DO THIS ONLY LOG-GIT-ACCESS.SH WILL WORK|
+-------------------------------------------------|
+
